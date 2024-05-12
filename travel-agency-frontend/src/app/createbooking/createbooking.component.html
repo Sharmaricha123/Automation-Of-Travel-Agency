@@ -1,0 +1,122 @@
+<h2>New Booking</h2>
+<h3> select Route</h3>
+&nbsp;
+&nbsp;
+<nz-select nzAllowClear [(ngModel)]="selectedvalue" nzPlaceHolder="Route"  (ngModelChange)="logroutes($event)">
+<nz-option *ngFor="let i of data" [nzValue]="i" [nzLabel]="i.from+'  to '+i.to"></nz-option>
+</nz-select>
+&nbsp;
+&nbsp;
+&nbsp;
+<h3> select Vehicle</h3>
+&nbsp;
+&nbsp;
+<nz-select nzAllowClear [(ngModel)]="selectedvalue1" nzPlaceHolder="Vehical"  (ngModelChange)="log($event)">
+  <nz-option *ngFor="let i of vehicledata" [nzValue]="i" [nzLabel]="i.vehicalname"></nz-option>
+  </nz-select>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+<form nz-form [formGroup]="addformgroup" >
+  <nz-form-item>
+    <nz-form-label  nzRequired nzFor="date">Date of Journey(dd/mm/yyyy)</nz-form-label>
+    <nz-form-control [nzSm]="8" [nzXs]="1000" nzErrorTip="please input date of journey">
+      <input nz-input formControlName="date" id="date" />
+    </nz-form-control>
+  </nz-form-item>
+</form>
+&nbsp;
+&nbsp;
+&nbsp;
+<h3 class="tag"*ngIf="test"> Booking details</h3>
+&nbsp;
+<nz-table *ngIf="test"  [nzData]="['']"  [nzFrontPagination]=false>
+  <thead>
+    <tr>
+      <th>Source</th>
+      <th>Destination</th>
+      <th>Distance in km</th>
+      <th>Vehiclename</th>
+      <th>PricePerKm</th>
+      <th>TotalPrice</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+     <tr>
+     <td style="padding: 10px; margin: 10px">{{selectedvalue?.from}}</td>
+     <td>{{selectedvalue?.to }}</td>
+     <td>{{selectedvalue?.distance}}</td>
+     <td>{{selectedvalue1?.vehicalname }}</td>
+     <td>{{selectedvalue1?.price}}</td>
+     <td>{{totalprice}}</td>
+     <td>{{addformgroup.value.date}}</td>
+    </tr>
+  <tbody>
+  </tbody>
+</nz-table>
+<button nz-button  *ngIf="test" (click)="showModalMiddle(selectedvalue)"nzType="primary">Proceed</button>
+<!-- <button  *ngIf="test"  (click)="addroute()"nz-button nzType="primary">submit</button> -->
+
+
+
+
+
+
+
+
+<nz-modal
+  [(nzVisible)]="isVisibleMiddle"
+  [nzTitle]="modalTitle"
+  [nzContent]="modalContent"
+  [nzFooter]="modalFooter"
+  (nzOnCancel)="handleCancelMiddle()"
+>
+ 
+
+
+
+
+<ng-template #modalTitle>Add payment Details</ng-template>
+   
+  <ng-template #modalContent>
+    <form nz-form [formGroup]="validateForm">
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">card number</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="please input source">
+          <input nz-input formControlName="source" id="source" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>Name of card </nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your destination!">
+          <input
+            nz-input
+            id="destination"
+            formControlName="destination"
+          />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkpassword" nzRequired>Cvv</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your Distance!">
+          <input
+            nz-input
+            id="distance"
+            formControlName="distance"
+          />
+        </nz-form-control>
+      </nz-form-item>
+      <p>Total Price:{{totalprice}}</p>
+    </form>
+  </ng-template>
+    <ng-template #modalFooter>
+    <button nz-button nzType="default" (click)="handleCancelMiddle()">cancle</button>
+    <button  [disabled]="!validateForm.valid"  (click)="addroute()"nz-button nzType="primary">Pay&Confirm</button>
+    <!-- <button nz-button nzType="primary" (click)="submitupdateForm()" [disabled]="!validateForm.valid" > Submit</button> -->
+  </ng-template>
+</nz-modal>
+
+

@@ -1,0 +1,41 @@
+<h2>Add vehicle</h2>
+<form nz-form [formGroup]="addformgroup" (ngSubmit)="submitAddform()">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">vehiclename</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="please input vehiclename">
+        <input nz-input formControlName="vehiclename" id="vehiclename" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>vehicletype</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your vehicletype">
+        <input
+          nz-input
+          id="vehicletype"
+          formControlName="vehicletype"
+        />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkpassword" nzRequired>vehiclenumber</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your vehiclenumber">
+        <input
+          nz-input
+          id="vehiclenumber"
+          formControlName="vehiclenumber"
+        />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkpassword" nzRequired>price</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your price">
+          <input
+            nz-input
+            id="price"
+            formControlName="price"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    <button nz-button nzType="primary"  [disabled]="!addformgroup.valid" (click)="addvehicle()"> Submit</button>
+  </form>
+

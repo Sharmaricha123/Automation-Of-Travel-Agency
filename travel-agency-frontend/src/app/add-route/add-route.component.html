@@ -1,0 +1,31 @@
+<h2>Add Route</h2>
+<form nz-form [formGroup]="addformgroup" (ngSubmit)="submitAddform()">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Source</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="please input Source">
+        <input nz-input formControlName="source" id="source" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>Destination</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your Destination!">
+        <input
+          nz-input
+          id="destination"
+          formControlName="destination"
+        />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkpassword" nzRequired>Distance</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input Distance!">
+        <input
+          nz-input
+          id="distance"
+          formControlName="distance"
+        />
+      </nz-form-control>
+    </nz-form-item>
+    <button nz-button nzType="primary"  [disabled]="!addformgroup.valid" (click)="addRoute()"> Submit</button>
+  </form>
+

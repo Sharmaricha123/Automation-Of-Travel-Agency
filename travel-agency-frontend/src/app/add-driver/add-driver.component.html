@@ -1,0 +1,31 @@
+<h2>Add driver</h2>
+<form nz-form [formGroup]="addformgroup" (ngSubmit)="submitAddform()">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">drivername</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="plase input drivername">
+        <input nz-input formControlName="drivername" id="drivername" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>mobilenumber</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your mobilenumber!">
+        <input
+          nz-input
+          id="mobilenumber"
+          formControlName="mobilenumber"
+        />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkpassword" nzRequired>licensenumber</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your licensenumber!">
+        <input
+          nz-input
+          id="licensenumber"
+          formControlName="licensenumber"
+        />
+      </nz-form-control>
+    </nz-form-item>
+    <button nz-button nzType="primary"  [disabled]="!addformgroup.valid" (click)="adddriver()"> Submit</button>
+  </form>
+

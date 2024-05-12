@@ -1,0 +1,31 @@
+<h2>All Bookings</h2>
+<nz-table #basicTable >
+    <thead>
+      <tr>
+        <th>Bookingid</th>
+        <th>source</th>
+        <th>destination</th>
+        <th>vehichlenumber</th>
+        <th>drivername</th>
+        <th>User</th>
+        <th>Total price</th>
+        <th>Date of travel</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let i of data">
+        <td>{{i.id}}</td>
+        <td>{{i.route.from}}</td>
+        <td>{{i.route.to}}</td>
+        <td>{{i.vehicle.vehicalnumber}}</td>
+        <td>{{i.driver.drivername}}</td>
+        <td>{{i.user.name}}</td>
+        <td>{{i.price}}</td>
+        <td>{{i.date}}</td>
+        <td> <button nz-button nzType="primary" (click)="deletebooking(i.id)"nzDanger>cancel</button>
+        
+
+      </tr>
+    </tbody>
+  </nz-table>

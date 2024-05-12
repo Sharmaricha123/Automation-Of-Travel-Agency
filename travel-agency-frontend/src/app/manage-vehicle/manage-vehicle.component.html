@@ -1,0 +1,89 @@
+<h2 *ngIf="isadminloggedin" >Managevehicle</h2>
+<h2  *ngIf="!isadminloggedin" >ViewVehicals</h2>
+<button  *ngIf="isadminloggedin" nz-button nzType="primary" (click)="submitadd()">add</button>
+&nbsp; 
+&nbsp; 
+<nz-table class="table" #basicTable >
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Number</th>
+        <th>Price/km</th>
+        <th>Status</th>
+        <th *ngIf="isadminloggedin">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let i of data">
+        <td>{{i.vehicalname}}</td>
+        <td>{{i.vehicaltype}}</td>
+        <td>{{i.vehicalnumber}}</td>
+        <td>{{i.price}}</td>
+        <td *ngIf="i.status==='booked'"><button  nz-button nzType="primary" nzDanger>{{i.status}}</button></td>
+        <td  *ngIf="i.status==='unbooked'"><button class="statusbutton"nz-button  >{{i.status}}</button></td>
+        <td> <button *ngIf="isadminloggedin" nz-button nzType="primary"(click)="deletedriver(i.vehicleid)" nzDanger>Delete</button> &nbsp; <button *ngIf="isadminloggedin" nz-button (click)="showModalMiddle(i)"nzType="primary">Update</button></td>
+      </tr>
+    </tbody>
+  </nz-table>
+
+
+
+
+  <nz-modal
+  [(nzVisible)]="isVisibleMiddle"
+  [nzTitle]="modalTitle"
+  [nzContent]="modalContent"
+  [nzFooter]="modalFooter"
+  (nzOnCancel)="handleCancelMiddle()"
+>
+  <ng-template #modalTitle>Update Driver</ng-template>
+   
+  <ng-template #modalContent>
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitupdateForm()">
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">vehiclename</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="plase input vehiclename">
+          <input nz-input [ngModel]="datanew.vehicalname"formControlName="vehiclename" id="vehiclename" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>vehiclenumber</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your vehiclenumber!">
+          <input
+            nz-input
+            id="vehiclenumber"
+            formControlName="vehiclenumber"
+            [ngModel]="datanew.vehicalnumber"
+          />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkpassword" nzRequired>vehicletype</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your vehicletype!">
+          <input
+            nz-input
+            id="vehicletype"
+            formControlName="vehicletype"
+            [ngModel]="datanew.vehicaltype"
+          />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkpassword" nzRequired>price</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your price!">
+          <input
+            nz-input
+            id="price"
+            formControlName="price"
+            [ngModel]="datanew.price"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </ng-template>
+    <ng-template #modalFooter>
+    <button nz-button nzType="default" (click)="handleCancelAdd()">cancle</button>
+    <button nz-button nzType="primary" (click)="submitupdateForm()" [disabled]="!validateForm.valid" > Submit</button>
+  </ng-template>
+</nz-modal>
